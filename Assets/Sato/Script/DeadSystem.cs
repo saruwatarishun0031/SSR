@@ -19,8 +19,9 @@ public class DeadSystem : MonoBehaviour
         }
     }
 
-    private void OnBecameInvisible()
+    void OnBecameInvisible()
     {
+        Debug.Log("è¡Ç¶ÇΩ");
         Destroy(this.gameObject);
     }
 }
