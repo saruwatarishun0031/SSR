@@ -252,8 +252,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7581e8ba8843274e90e6a36b2b7a92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _line: {fileID: 2044411398}
+  lineMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  lineColor: {r: 1, g: 1, b: 1, a: 0}
+  lineWidth: 0.2
   _distanceBetweenPoints: 0.1
+  _lineRenderers: []
 --- !u!4 &2044411400
 Transform:
   m_ObjectHideFlags: 0

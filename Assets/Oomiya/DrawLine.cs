@@ -21,6 +21,8 @@ public class DrawLine : MonoBehaviour
     //追加　LineRdenerer型のリスト宣言
     [SerializeField] List<LineRenderer> _lineRenderers;
 
+    List<Vector2> linePoints = new List<Vector2>();
+
     private void Start()
     {
         //追加　Listの初期化
@@ -53,12 +55,14 @@ public class DrawLine : MonoBehaviour
         //オブジェクトの名前をbridgeに変更
         lineObj.name = "bridge";
         //lineObjにLineRendererコンポーネント追加
-        lineObj.AddComponent<LineRenderer>();
-        lineObj.AddComponent<Collider2D>();
+       var lr =  lineObj.AddComponent<LineRenderer>();
+        //lr.useWorldSpace = false;
+        lineObj.AddComponent<EdgeCollider2D>();
         //lineRendererリストにlineObjを追加
-        _lineRenderers.Add(lineObj.GetComponent<LineRenderer>());
+        _lineRenderers.Add(lr);
         //lineObjを自身の子要素に設定
         lineObj.transform.SetParent(transform);
+       
         InitRenderers();
     }
 
@@ -85,30 +89,21 @@ public class DrawLine : MonoBehaviour
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f);
 
         //スクリーン座標をワールド座標に変換
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePosition);
 
         //ワールド座標をローカル座標に変換
-        Vector3 localPosition = transform.InverseTransformPoint(worldPosition.x, worldPosition.y, -1.0f);
-
-        //lineRenderersの最後のlineObjのローカルポジションを上記のローカルポジションに設定
-        _lineRenderers[_lineRenderers.Count-1].transform.localPosition = localPosition;
+        Vector3 localPosition = transform.InverseTransformPoint(worldPos.x, worldPos.y, -1.0f);
 
         //lineObjの線と線をつなぐ点の数を更新
         _lineRenderers[_lineRenderers.Count - 1].positionCount += 1;
 
         //LineRendererコンポーネントリストを更新
-        _lineRenderers[_lineRenderers.Count - 1].SetPosition(_lineRenderers[_lineRenderers.Count - 1].positionCount - 1, worldPosition);
+        _lineRenderers[_lineRenderers.Count - 1].SetPosition(_lineRenderers[_lineRenderers.Count - 1].positionCount - 1, worldPos);
 
+        //linePointsに線の座標を追加
+        linePoints.Add(localPosition);
 
-        //// Line Renderer の positions に新たに追加する座標を計算する
-        //Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //pos.z = 0;
-
-        //// 最後に追加した Line Renderer の positions よりある程度離れていたら、その座標を Line Renderer に追加する
-        //if (_line.positionCount == 0 || (Vector3.Distance(pos, _line.GetPosition(_line.positionCount - 1)) > _distanceBetweenPoints))
-        //{
-        //    _line.positionCount++;
-        //    _line.SetPosition(_line.positionCount - 1, pos);
-        //}
+        //LineRendererにEdgeCollider2Dを貼り付け
+        _lineRenderers[_lineRenderers.Count-1].GetComponent<EdgeCollider2D>().SetPoints(linePoints);
     }
 }
