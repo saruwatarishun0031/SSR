@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     MoveObject2D object2D;
 
     [SerializeField] Canvas _result;
+    [SerializeField] GameObject _respawn;
+    [SerializeField] GameObject _plyaer;
 
     //シングルトンパターン（簡易型、呼び出される）
     public static GameManager Instance;
@@ -23,6 +25,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        PlayerSpawn();
     }
     //シングルトン（ここまで）
     // Start is called before the first frame update
@@ -54,5 +58,10 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Result");
         }
+    }
+
+    void PlayerSpawn()
+    {
+        Instantiate(_plyaer, _respawn.transform.position, _respawn.transform.rotation);
     }
 }

@@ -8,9 +8,13 @@ public class MoveObject2D : MonoBehaviour
 
     [SerializeField, Range(1, 100), Header("速さ")]
     private float Speed;
+    [SerializeField, Header("ゲームオーバー")] string _name;
+    [SerializeField, Header("ゲームオーバー")] string _name2;
+    [SerializeField,Header("クリア")] string _name3;
 
     public bool _gameover;
     public bool _clear;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +34,7 @@ public class MoveObject2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "" || collision.gameObject.name == "")
+        if (collision.gameObject.name == _name || collision.gameObject.name == "")
         {
             _gameover = true;
         }
