@@ -54,6 +54,7 @@ public class DrawLine : MonoBehaviour
         lineObj.name = "bridge";
         //lineObjにLineRendererコンポーネント追加
         lineObj.AddComponent<LineRenderer>();
+        lineObj.AddComponent<Collider>();
         //lineRendererリストにlineObjを追加
         _lineRenderers.Add(lineObj.GetComponent<LineRenderer>());
         //lineObjを自身の子要素に設定
