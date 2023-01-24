@@ -12,7 +12,7 @@ public class DeadSystem : MonoBehaviour
     private void Awake()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
-        _PlayerObj = GameObject.Find("Player");
+        _PlayerObj = GameObject.Find("Player(Clone)");
     }
     /// <summary>
     /// ã‚ÉŒü‚¯‚ÄËo‚·‚éAParent‚É“n‚·
@@ -47,6 +47,11 @@ public class DeadSystem : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if (collision.TryGetComponent(out LineRenderer lr))
+        {
+            Destroy(this.gameObject);
+        }
+        
     }
 
     void OnBecameInvisible()
