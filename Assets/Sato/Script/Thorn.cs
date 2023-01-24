@@ -8,7 +8,7 @@ public class Thorn : MonoBehaviour
 
     void Start()
     {
-        _PlayerObj = GameObject.Find("Player");
+        _PlayerObj = GameObject.Find("Player(Clone)");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

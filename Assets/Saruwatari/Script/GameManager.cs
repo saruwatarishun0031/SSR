@@ -37,14 +37,7 @@ public class GameManager : MonoBehaviour
         object2D = GetComponent<MoveObject2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        GameOver();
-        Clear();
-    }
-
-    void GameOver()
+    public void GameOver()
     {
        if (object2D._gameover == true)
        {
@@ -52,7 +45,7 @@ public class GameManager : MonoBehaviour
        }
     }
 
-    void Clear()
+    public void Clear()
     {
         if (object2D._clear == true)
         {
@@ -60,8 +53,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void PlayerSpawn()
+    public void PlayerSpawn()
     {
-        Instantiate(_plyaer, _respawn.transform.position, _respawn.transform.rotation);
+            Instantiate(_plyaer, _respawn.transform.position, _respawn.transform.rotation);
+    }
+
+    public void BackTitle()
+    {
+        SceneManager.LoadScene("Title");
     }
 }
