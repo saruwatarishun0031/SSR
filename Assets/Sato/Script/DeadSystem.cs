@@ -42,6 +42,7 @@ public class DeadSystem : MonoBehaviour
         if (collision.gameObject == _PlayerObj)
         {
             Destroy(_PlayerObj);
+            GameManager.Instance.GameOver();
         }
         if (collision.gameObject)
         {

@@ -14,11 +14,11 @@ public class Retry : MonoBehaviour
 
     public void PushRetry()
     {
-        if (_isRetry == true) return;
-        else if (_isRetry == false)
+        if (_isRetry == false)
         {
             _isRetry = true;
             GameManager.Instance.PlayerSpawn();
         }
+        _isRetry = false;
     }
 }
