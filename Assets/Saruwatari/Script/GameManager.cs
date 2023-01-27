@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas _result;
     [SerializeField] GameObject _respawn;
     [SerializeField] GameObject _plyaer;
+    [SerializeField] ChinemaForrow _cinemaForrow;
+    private bool _isGameOver;
+
 
     //シングルトンパターン（簡易型、呼び出される）
     public static GameManager Instance;
@@ -26,7 +29,8 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
-        PlayerSpawn();
+        Instantiate(_plyaer, _respawn.transform.position, _respawn.transform.rotation);
+        _isGameOver = false;
     }
     //シングルトン（ここまで）
     // Start is called before the first frame update
@@ -34,28 +38,30 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        object2D = GetComponent<MoveObject2D>();
+        //object2D = GetComponent<MoveObject2D>();
     }
 
     public void GameOver()
     {
-       if (object2D._gameover == true)
-       {
-            _result.gameObject.SetActive(true);
-       }
+        if (_isGameOver == false)
+        {
+            _isGameOver = true;
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     public void Clear()
     {
-        if (object2D._clear == true)
-        {
-            SceneManager.LoadScene("Result");
-        }
+        SceneManager.LoadScene("Result");
     }
 
     public void PlayerSpawn()
     {
-            Instantiate(_plyaer, _respawn.transform.position, _respawn.transform.rotation);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //_isGameOver = false;
+        //_result.gameObject.SetActive(false);
+        
+        //_cinemaForrow.ReBoot();
     }
 
     public void BackTitle()

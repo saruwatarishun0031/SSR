@@ -22,12 +22,16 @@ public class ChinemaForrow : MonoBehaviour
     {
         _virtualCamera = GetComponent<CinemachineVirtualCamera>();
 
+        ReBoot();
+    }
+
+    public void ReBoot()
+    {
         _player = GameObject.Find("Player(Clone)");
         _forrow = _player.transform;
         _offset = _player.transform.position;
         _cameraPos = TargetPosition;
     }
-
     private void FixedUpdate()
     {
         
