@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Sato/Scene/Title.unity
+    guid: 8b33791e2f135c34cbd08982ec8b72aa
+  - enabled: 1
+    path: Assets/Sato/Scene/Stage_01.unity
+    guid: 352a293a950d67345b452bb9f3a38404
+  - enabled: 1
+    path: Assets/Sato/Scene/GameOver.unity
+    guid: 243e5d6125a4c0a4587cfde3e6fd8362
   m_configObjects: {}
