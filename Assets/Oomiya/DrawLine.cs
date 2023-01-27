@@ -1,11 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// ドラッグで線を描くコンポーネント
 /// </summary>
 public class DrawLine : MonoBehaviour
 {
+    //現在のライン
+    LineRenderer _correntline;
     //線の材質
     [SerializeField] Material lineMaterial;
     //線の色
@@ -21,7 +24,7 @@ public class DrawLine : MonoBehaviour
     //追加　LineRdenerer型のリスト宣言
     [SerializeField] List<LineRenderer> _lineRenderers;
 
-    List<Vector2> linePoints = new List<Vector2>();
+    List<Vector2> _linePoints = new List<Vector2>();
 
     private void Start()
     {
@@ -62,7 +65,10 @@ public class DrawLine : MonoBehaviour
         _lineRenderers.Add(lr);
         //lineObjを自身の子要素に設定
         lineObj.transform.SetParent(transform);
-       
+
+        //今書いているラインを変数に格納
+        _correntline = _lineRenderers.Last();
+        //初期化
         InitRenderers();
     }
 
@@ -70,14 +76,14 @@ public class DrawLine : MonoBehaviour
     void InitRenderers()
     {
         //線をつなぐ点を0に初期化
-        _lineRenderers[_lineRenderers.Count - 1].positionCount = 0;
+        _correntline.positionCount = 0;
         //マテリアルを初期化
-        _lineRenderers[_lineRenderers.Count - 1].material = lineMaterial;
+        _correntline.material = lineMaterial;
         //色の初期化
-        _lineRenderers[_lineRenderers.Count - 1].material.color = lineColor;
+        _correntline.material.color = lineColor;
         //太さの初期化
-        _lineRenderers[_lineRenderers.Count - 1].startWidth = lineWidth;
-        _lineRenderers[_lineRenderers.Count - 1].endWidth = lineWidth;
+        _correntline.startWidth = lineWidth;
+        _correntline.endWidth = lineWidth;
     }
 
     /// <summary>
@@ -95,15 +101,15 @@ public class DrawLine : MonoBehaviour
         Vector3 localPosition = transform.InverseTransformPoint(worldPos.x, worldPos.y, -1.0f);
 
         //lineObjの線と線をつなぐ点の数を更新
-        _lineRenderers[_lineRenderers.Count - 1].positionCount += 1;
+        _correntline.positionCount += 1;
 
         //LineRendererコンポーネントリストを更新
-        _lineRenderers[_lineRenderers.Count - 1].SetPosition(_lineRenderers[_lineRenderers.Count - 1].positionCount - 1, worldPos);
+        _correntline.SetPosition(_correntline.positionCount - 1, worldPos);
 
         //linePointsに線の座標を追加
-        linePoints.Add(localPosition);
+        _linePoints.Add(localPosition);
 
         //LineRendererにEdgeCollider2Dを貼り付け
-        _lineRenderers[_lineRenderers.Count-1].GetComponent<EdgeCollider2D>().SetPoints(linePoints);
+        _correntline.GetComponent<EdgeCollider2D>().SetPoints(_linePoints);
     }
 }
