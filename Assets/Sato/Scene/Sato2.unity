@@ -4349,6 +4349,7 @@ MonoBehaviour:
   _result: {fileID: 674460974}
   _respawn: {fileID: 1287779323}
   _plyaer: {fileID: 766768064265193052, guid: 7e015a2f1391e3c459a8f1cbec8c905f, type: 3}
+  _cinemaForrow: {fileID: 1804086668}
 --- !u!4 &1173250493
 Transform:
   m_ObjectHideFlags: 0
