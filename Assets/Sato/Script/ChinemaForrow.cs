@@ -14,7 +14,7 @@ public class ChinemaForrow : MonoBehaviour
     private Vector3 _cameraPos;
     private Vector3 _cameraVerocity;
 
-    private Vector3 _minusPos = new Vector3(-15.0f, 0.0f, 10.0f);
+    private Vector3 _minusPos = new Vector3(-15.0f,2.0f, 10.0f);
 
     private Vector3 TargetPosition => _forrow.position + _offset;
     // Start is called before the first frame update
