@@ -35,8 +35,9 @@ public class MoveObject2D : MonoBehaviour
         if (_onLine == false)
         {
             _rb.velocity = _rb.transform.right * Speed;
-            Vector2 newGravity = new Vector2(0, -9.81f);
-            _rb.AddForce(newGravity);
+            //_rb.AddForce(transform.right * Time.deltaTime, ForceMode2D.Force);
+            //Vector2 newGravity = new Vector2(0, -9.81f);
+            //_rb.AddForce(newGravity);
         }
     }
 
@@ -50,7 +51,7 @@ public class MoveObject2D : MonoBehaviour
 
             Vector3 diffGravity = hitPos - this.transform.position;
 
-            Vector3 forceDir = diffGravity.normalized * 3f;
+            Vector3 forceDir = diffGravity.normalized * 6.3f;
 
             _rb.velocity = _rb.transform.right * Speed;
 
